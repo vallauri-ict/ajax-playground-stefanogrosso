@@ -4,19 +4,33 @@ const apiKey="F7SNAVU4M1AYTG2O";
 $(document).ready(function () {
     let _table=$("#tableData tbody");
     let _cmb=$("#cmbSymbols");
+	let _chartTypeCmb=$("#chartStyleList");
+    let ctx;
+    
     _cmb.prop("selectedIndex","-1");
 
     _cmb.on("change",function () {
         _table.html("").append(createRows(0));
         getGlobalQuotes($(this).val(),0);
     });
+	
+	_chartTypeCmb.on("change",function(){
+		let ds=Irequest("GET","http://localhost:3000/SECTOR");
+		ds.done(function (data) {
+		if(!ctx)
+		{
+			ctx=chartCreation("http://localhost:3000/chart");
+		}
+		chartMod(ctx, data[_chartTypeCmb.val()]);
+		});
+	});
 
     $("#textSearched").on("keyup",function () {
         if($("#textSearched").val().length>=2) {
             _table.html("");
             getSymbolSearched($(this).val(), _table);
         }
-    })
+    });
 });
 
 function createRows(n) {
@@ -33,11 +47,12 @@ function createRows(n) {
     return tr;
 }
 
+let globalQuoteData;
 function getGlobalQuotes(symbol,i) {
     let url = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol="+symbol+"&apikey="+apiKey;
     $.getJSON(url,
         function (data) {
-            let globalQuoteData = data["Global Quote"];
+            globalQuoteData = data["Global Quote"];
             $("#symbol"+i).text(globalQuoteData["01. symbol"]);
             $("#previousClose"+i).text(globalQuoteData["08. previous close"]);
             $("#open"+i).text(globalQuoteData["02. open"]);
@@ -59,4 +74,43 @@ function getSymbolSearched(str,table) {
             getGlobalQuotes(data["bestMatches"][i]["1. symbol"],i);
         }
     })
+}
+
+function chartCreation(dataChart){
+    let _data = Irequest("GET", dataChart,{},false);
+    _data.done(function (data)
+    {
+        return data;
+    });
+    let chart=new Chart($("#canvas"),JSON.parse(_data.responseText));
+    return chart;
+}
+
+function chartMod(chart, contenuto)
+{
+    let dataChart=chart["data"];
+    dataChart["labels"]=[];
+    let dataset=dataChart["datasets"][0];
+    dataset["data"]=[];
+    for (let chiave in contenuto)
+    {
+        dataChart["labels"].push(chiave);
+        dataset["data"].push(contenuto[chiave].replace("%", ""));
+        dataset["backgroundColor"].push("rgb(255, 0, 0)");
+        dataset["borderColor"].push("rgb(255, 0, 0)");
+    }
+    chart.update();
+}
+
+function Irequest(method, url, parameters = "",async=true)
+{
+    return $.ajax({
+        type: method,
+        url: url,
+        data: parameters,
+        contentType: "application/x-www-form-urlencoded;charset=utf-8",
+        dataType: "json",
+        timeout: 5000,
+        async:async
+    });
 }
