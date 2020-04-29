@@ -97,8 +97,8 @@ function chartMod(chart, content)
     {
         dataChart["labels"].push(key);
         dataset["data"].push(content[key].replace("%", ""));
-        dataset["backgroundColor"].push("rgb(255, 0, 0)");
-        dataset["borderColor"].push("rgb(255, 0, 0)");
+        dataset["borderColor"].push("rgb(25, 52, 255)");
+        dataset["backgroundColor"].push("rgb(25, 52, 255)");
     }
     chart.update();
 }
