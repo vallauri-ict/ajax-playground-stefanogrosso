@@ -18,9 +18,7 @@ $(document).ready(function () {
 		let ds=Irequest("GET","http://localhost:3000/SECTOR");
 		ds.done(function (data) {
 		if(!ctx)
-		{
 			ctx=chartCreation("http://localhost:3000/chart");
-		}
 		chartMod(ctx, data[_chartTypeCmb.val()]);
 		});
 	});
