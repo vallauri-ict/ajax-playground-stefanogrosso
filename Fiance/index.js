@@ -74,26 +74,29 @@ function getSymbolSearched(str,table) {
     })
 }
 
+//Chart section
+//includes:
+//-json-server Request (Ajax technology)
+//-Chart creation
+//-Chart mod
+//Chart creation an chart mod are call when the char type DDBox change ($document.ready Function)
 function chartCreation(dataChart){
     let _data = Irequest("GET", dataChart,{},false);
-    _data.done(function (data)
-    {
-        return data;
-    });
-    let chart=new Chart($("#canvas"),JSON.parse(_data.responseText));
-    return chart;
+    _data.done(function (data) { return data; });
+
+    return new Chart($("#canvas"),JSON.parse(_data.responseText));
 }
 
-function chartMod(chart, contenuto)
+function chartMod(chart, content)
 {
     let dataChart=chart["data"];
     dataChart["labels"]=[];
     let dataset=dataChart["datasets"][0];
     dataset["data"]=[];
-    for (let chiave in contenuto)
+    for (let key in content)
     {
-        dataChart["labels"].push(chiave);
-        dataset["data"].push(contenuto[chiave].replace("%", ""));
+        dataChart["labels"].push(key);
+        dataset["data"].push(content[key].replace("%", ""));
         dataset["backgroundColor"].push("rgb(255, 0, 0)");
         dataset["borderColor"].push("rgb(255, 0, 0)");
     }
