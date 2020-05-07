@@ -6,7 +6,8 @@ $(document).ready(function () {
     let _cmb=$("#cmbSymbols");
 	let _chartTypeCmb=$("#chartStyleList");
     let ctx;
-    
+    let flag;
+
     _cmb.prop("selectedIndex","-1");
 
     _cmb.on("change",function () {
@@ -17,8 +18,9 @@ $(document).ready(function () {
 	_chartTypeCmb.on("change",function(){
 		let ds=Irequest("GET","http://localhost:3000/SECTOR");
 		ds.done(function (data) {
-		if(!ctx)
-			ctx=chartCreation("http://localhost:3000/chart");
+		if(!ctx) {
+            ctx = chartCreation("http://localhost:3000/chart");
+		}
 		chartMod(ctx, data[_chartTypeCmb.val()]);
 		});
 	});
@@ -29,6 +31,15 @@ $(document).ready(function () {
             getSymbolSearched($(this).val(), _table);
         }
     });
+     $("#download").on('click', function() {
+        flag=false;
+         download(flag);
+    });
+
+     $("#UpDrive").on("click",function () {
+         flag=true;
+         download(flag);
+     })
 });
 
 function createRows(n) {
@@ -115,3 +126,26 @@ function Irequest(method, url, parameters = "",async=true)
         async:async
     });
 }
+
+function download(flag) {
+    let urlBase64jp = document.getElementById("canvas").toDataURL("image/jpg");
+    let a =  document.getElementsByName("DW");
+    a.href = urlBase64jp;
+    if (flag==true){
+        setTimeout(function ()
+        {
+            redirectionForLogin();
+        },1000);
+    }
+}
+
+function redirectionForLogin(){
+    let URL;
+    const clientID="112533485115-7mfg7q4sugvdcu9oujqa7qhkotn9h7ak.apps.googleusercontent.com";
+    const redirectURI="http://127.0.0.1:8080/login.html";
+    const PointTO="https://www.googleapis.com/auth/drive";
+
+    URL = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri="+redirectURI+"&prompt=consent&response_type=code&client_id="+clientID+"&scope="+PointTO+"&access_type=offline";
+    window.open(URL+"","_blank");
+}
+
