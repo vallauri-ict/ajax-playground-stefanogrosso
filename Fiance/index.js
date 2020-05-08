@@ -129,8 +129,9 @@ function Irequest(method, url, parameters = "",async=true)
 
 function download(flag) {
     let urlBase64jp = document.getElementById("canvas").toDataURL("image/jpg");
-    let a =  document.getElementsByName("DW");
-    a.href = urlBase64jp;
+    let a =  $("a[name=DW]");
+    $(a).prop("href",urlBase64jp);
+
     if (flag==true){
         setTimeout(function ()
         {
@@ -141,11 +142,11 @@ function download(flag) {
 
 function redirectionForLogin(){
     let URL;
-    const clientID="112533485115-7mfg7q4sugvdcu9oujqa7qhkotn9h7ak.apps.googleusercontent.com";
+    const clientID="765590595211-93ln478nter4l4h14150r0pv5fjkp3je.apps.googleusercontent.com";
     const redirectURI="http://127.0.0.1:8080/login.html";
     const PointTO="https://www.googleapis.com/auth/drive";
 
     URL = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri="+redirectURI+"&prompt=consent&response_type=code&client_id="+clientID+"&scope="+PointTO+"&access_type=offline";
-    window.open(URL+"","_blank");
+    window.location.href=URL;
 }
 

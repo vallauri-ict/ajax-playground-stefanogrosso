@@ -1,13 +1,12 @@
 "use strict";
 
 $(document).ready(function(){
+    let clientID = "765590595211-93ln478nter4l4h14150r0pv5fjkp3je.apps.googleusercontent.com";
+    const redirectUri = "http://127.0.0.1:8080/login.html";
+    const clientSecret = "iHquWxKR26l1e1Xl58fjCRg2";
+    const pointTO = "https://www.googleapis.com/auth/drive";
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    const redirectUri = "http://127.0.0.1:8080/upload.html";
-    const clientSecret = "ASbePZGSRwx8VdTg8SZ4q_01";
-    const pointTO = "https://www.googleapis.com/auth/drive";
-    let access_token= "";
-    let clientID = "112533485115-7mfg7q4sugvdcu9oujqa7qhkotn9h7ak.apps.googleusercontent.com";
 
 
     $.ajax({
@@ -55,6 +54,7 @@ $(document).ready(function(){
     {
         return this.file.name;
     };
+
     Upload.prototype.doUpload = function ()
     {
         let that = this;
@@ -82,6 +82,7 @@ $(document).ready(function(){
             },
             success: function (data) {
                 console.log(data);
+                window.location.href="http://127.0.0.1:8080";
             },
             error: function (error) {
                 console.log(error);
