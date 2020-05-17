@@ -1,0 +1,21 @@
+<svg viewBox="0 0 886 616"
+  xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="d" x="-12.1%" y="-20.4%" width="124.1%" height="140.9%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="31.125"/>
+    </filter>
+    <linearGradient id="c" x2="98.523%" y1="50%" y2="50%">
+      <stop stop-color="#CACEDC" offset="0"/>
+      <stop stop-color="#F4F5F9" offset=".32616"/>
+      <stop stop-color="#F4F5F9" offset=".71426"/>
+      <stop stop-color="#D8D8D8" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(33)" fill-rule="evenodd">
+    <path d="m124.26 79.752h569.61v398.31l103.36 58.478h-774.14l101.17-57.374z" fill="#4E5056" filter="url(#d)" opacity=".577"/>
+    <path d="M98.16 0h623.205c11.135 0 20.16 9.026 20.16 20.16v416.469c0 11.134-9.025 20.16-20.16 20.16H98.16c-11.134 0-20.16-9.026-20.16-20.16V20.16C78 9.026 87.026 0 98.16 0z" fill="#FFF"/>
+    <path d="M0 450.479h818.678c1.1 11.033-8.803 16.55-29.71 16.55H28.06C9.353 467.03 0 461.512 0 450.48z" fill="#CACEDC"/>
+    <rect y="441.65" width="818.68" height="15.447" rx="2.88" fill="#F4F5F9"/>
+    <rect x="332.09" y="441.65" width="155.05" height="8.827" rx="1.92" fill="url(#c)"/>
+  </g>
+</svg>

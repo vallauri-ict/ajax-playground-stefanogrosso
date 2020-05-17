@@ -82,7 +82,7 @@ $(document).ready(function(){
             },
             success: function (data) {
                 console.log(data);
-                window.location.href="http://127.0.0.1:8080";
+                //window.location.href="http://127.0.0.1:8080";
             },
             error: function (error) {
                 console.log(error);

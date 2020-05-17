@@ -239,9 +239,9 @@
             "datasets": [
                 {
                     "data": [],
-                    "backgroundColor": [],
-                    "borderColor": [],
-                    "borderWidth": 1
+                    "backgroundColor": ["rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)","rgba(45,45,45,0.5)"],
+                    "borderColor": ["rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)","rgba(45,45,45,1)"],
+                    "borderWidth": 4
                 }
             ]
         },
@@ -249,16 +249,20 @@
             "scales": {
                 "yAxes": [
                     {
+                        "scaleLabel": {"fontColor": "black"},
                         "ticks": {
-                            "beginAtZero": true
+                            "beginAtZero": true,
+                            "fontColor": "black"
                         }
                     }
                 ],
                 "xAxes": [{
+                    "scaleLabel": {"fontColor": "black"},
                     "ticks": {
                         "autoSkip": false,
                         "maxRotation": 90,
-                        "minRotation": 90
+                        "minRotation": 90,
+                        "fontColor": "black"
                     }
                 }]
             },
