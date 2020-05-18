@@ -10,5 +10,7 @@
 All'interno del progetto sono presenti due classi per la gestione di questi documenti:
 * RANDOMUSER (API di randomuser.me)
 * BANCHE
-* FINANCE
+* FINANCE (API :
+              * Alphavantage.co
+              * Google)
 
