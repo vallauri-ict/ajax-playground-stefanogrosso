@@ -10,3 +10,4 @@
 Nel progetto troviamo:
 * Tabella relativa alle azioni della relativa azienda.
 * Grafico rappresntativo(Grfico variabile in base all' esigenza).
+* Download e Caricamento di file(.jpg) su Google drive tramite API Google.
