@@ -48,13 +48,36 @@
             color: #0011f3;
         }
 
+        #logStatus{
+            width: 2em;
+            height: 2em;
+            border-radius: 20%;
+            margin-top: 0.65%;
+            margin-left: 1%;
+        }
+        .red{
+            background-color: red;
+        }
+        .green{
+            background-color: #21ff00;
+        }
+
+        #logout{
+            color: white;
+            width: 2em;
+            height: 2em;
+            border-radius: 20%;
+            margin-top: 0.65%;
+            margin-left: 1%;
+        }
         /* Background*/
         #home {
             clip-path: url(#cache);
         }
 
         body {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            /*background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);*/
+            background: linear-gradient(-45deg, #0011ee, #364ae7, #23a6d5, #23d5ab);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
@@ -80,7 +103,7 @@
 
         .fl-table {
             border-radius: 5px;
-            font-size: 18pt;
+            font-size: 1.2em;
             font-weight: normal;
             border: none;
             border-collapse: collapse;
@@ -188,7 +211,9 @@
 
 <nav style="background-color: #4b4b4b;" class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-        <div class="navbar-header" style="margin-top: 7px; margin-left:17%;">
+        <div class="navbar-header" id="logStatus"></div>
+        <div class="navbar-header" id="logout">LogOut</div>
+        <div class="navbar-header" style="margin-top: 7px; margin-left:15%;">
             <select class="form-control" id="cmbSymbols" style="width: 210px;">
                 <option value="MSFT">Microsoft</option>
                 <option value="AAPL">Apple.inc</option>
@@ -197,7 +222,7 @@
                 <option value="AMZN">Amazon.com</option>
             </select>
         </div>
-		 <div class="navbar-header" style="margin-top: 7px;margin-left:17%;">
+		 <div class="navbar-header" style="margin-top: 7px;margin-left:15%;">
 			<select select class="form-control" id="chartStyleList" style="width: 210px;">
             <option value="null"> -- Seleziona -- </option>
             <option>Rank A: Real-Time Performance</option>
@@ -221,9 +246,9 @@
         </ul>
     </div>
 </nav>
-<div style="margin-left: 80px; margin-top: -10px;">
+<div style="margin-left: 80px;">
     <img src="IMG.png">
-    <img src="AVIMG.png" height="90px" style="margin-left: 1113px;">
+    <img src="AVIMG.png" height="90px" style="float: right; margin-right: 5.4%">
 </div>
 <div id="wrapper">
     <div id="quote" class="table-wrapper">
@@ -263,13 +288,11 @@
             href=""
             class="btn float-right"
             title="Chart" style="margin-left: 23px"> CHART DOWNLOAD </a>
-    <a id="UpDrive" name="DW"
-       download="Chart.jpg"
-       href=""
+    <a id="UpDrive"
        class="btn float-right"
        title="Chart" style="margin-left: 23px"> UPLOAD ON DRIVE </a>
 </div>
+<iframe src="login.html" id="IFR" style="float: left; margin-top: 10px; margin-left: 24px;" frameborder="0"></iframe>
 <canvas id="canvas"></canvas>
-<div id="IF"><object id="obj"></object></div>
 </body>
 </html>

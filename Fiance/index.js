@@ -2,6 +2,58 @@
 const apiKey="F7SNAVU4M1AYTG2O";
 
 $(document).ready(function () {
+    $("#IFR").hide();
+    let clientID = "112533485115-q2g4rm7s2kh9qr0476rau3cgv4qn3o3c.apps.googleusercontent.com";
+    const redirectUri = "http://127.0.0.1:8080/index.html";
+    const clientSecret = "8a7c1ClIutbheQNik5Me3kMe";
+    const pointTO = "https://www.googleapis.com/auth/drive";
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    let at=localStorage.getItem("accessToken");
+
+    if (code) {
+        $.ajax({
+            type: 'POST',
+            url: "https://www.googleapis.com/oauth2/v4/token",
+            data: {
+                code: code,
+                redirect_uri: redirectUri,
+                client_secret: clientSecret,
+                client_id: clientID,
+                scope: pointTO,
+                grant_type: "authorization_code"
+            },
+            dataType: "json",
+            success: function (resultData) {
+                localStorage.setItem("accessToken", resultData.access_token);
+                localStorage.setItem("refreshToken", resultData.refreshToken);
+                localStorage.setItem("expires_in", resultData.expires_in);
+                window.history.pushState({}, document.title, "index.html");
+
+                at=localStorage.getItem("accessToken");
+                if (at!=null) {
+                    $("#logStatus").css("background-color","green");
+                }
+                else{
+                    $("#logStatus").css("background-color","red");
+                }
+            }
+        });
+    }
+    if (at!=null) {
+        $("#logStatus").css("background-color","green");
+    }
+    else{
+        $("#logStatus").css("background-color","red");
+    }
+
+
+    $("#logout").on("click",function () {
+        localStorage.clear();
+        $("#logStatus").css("background-color","red");
+    })
+
+
     let _table=$("#tableData tbody");
     let _cmb=$("#cmbSymbols");
 	let _chartTypeCmb=$("#chartStyleList");
@@ -37,9 +89,12 @@ $(document).ready(function () {
     });
 
      $("#UpDrive").on("click",function () {
-         flag=true;
-         download(flag);
+            $("#IFR").show();
      })
+
+    $("#logStatus").on("click",function () {
+        redirectionForLogin();
+    })
 });
 
 function createRows(n) {
@@ -135,18 +190,22 @@ function download(flag) {
     if (flag==true){
         setTimeout(function ()
         {
-            redirectionForLogin();
+            window.location.href="login.html";
         },1000);
     }
 }
 
 function redirectionForLogin(){
     let URL;
-    const clientID="765590595211-93ln478nter4l4h14150r0pv5fjkp3je.apps.googleusercontent.com";
-    const redirectURI="http://127.0.0.1:8080/login.html";
+    const clientID="112533485115-q2g4rm7s2kh9qr0476rau3cgv4qn3o3c.apps.googleusercontent.com";
+    const redirectURI="http://127.0.0.1:8080/index.html";
     const PointTO="https://www.googleapis.com/auth/drive";
 
     URL = "https://accounts.google.com/o/oauth2/v2/auth?redirect_uri="+redirectURI+"&prompt=consent&response_type=code&client_id="+clientID+"&scope="+PointTO+"&access_type=offline";
     window.location.href=URL;
 }
+
+
+
+
 

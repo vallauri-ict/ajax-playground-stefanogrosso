@@ -1,39 +1,13 @@
 "use strict";
 
 $(document).ready(function(){
-    let clientID = "765590595211-93ln478nter4l4h14150r0pv5fjkp3je.apps.googleusercontent.com";
+    let clientID = "112533485115-q2g4rm7s2kh9qr0476rau3cgv4qn3o3c.apps.googleusercontent.com";
     const redirectUri = "http://127.0.0.1:8080/login.html";
-    const clientSecret = "iHquWxKR26l1e1Xl58fjCRg2";
+    const clientSecret = "8a7c1ClIutbheQNik5Me3kMe";
     const pointTO = "https://www.googleapis.com/auth/drive";
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
 
-
-    $.ajax({
-        type: 'POST',
-        url: "https://www.googleapis.com/oauth2/v4/token",
-        data: {
-            code:code,
-            redirect_uri:redirectUri,
-            client_secret:clientSecret,
-            client_id:clientID,
-            scope:pointTO,
-            grant_type:"authorization_code"
-        },
-        dataType: "json",
-        success: function(resultData)
-        {
-            localStorage.setItem("accessToken",resultData.access_token);
-            localStorage.setItem("refreshToken",resultData.refreshToken);
-            localStorage.setItem("expires_in",resultData.expires_in);
-            window.history.pushState({}, document.title, "/GitLoginApp/" + "login.html");
-        }
-    });
-
-    function stripQueryStringAndHashFromPath(URL)
-    {
-        return URL.split("?")[0].split("#")[0];
-    }
 
     let Upload = function (file)
     {
@@ -62,11 +36,11 @@ $(document).ready(function(){
 
         formData.append("file", this.file, this.getName());
         formData.append("upload_file", true);
-
+        let at=localStorage.getItem("accessToken");
         $.ajax({
             type: "POST",
             beforeSend: function(request) {
-                request.setRequestHeader("Authorization", "Bearer" + " " + localStorage.getItem("accessToken"));
+                request.setRequestHeader("Authorization", "Bearer" + " " + at);
 
             },
             url: "https://www.googleapis.com/upload/drive/v2/files",
